@@ -1,0 +1,17 @@
+.card.border
+  .card-body
+    .row.align-items-center
+      .col-3
+        %h3.card-title
+          Products
+
+      .col-6
+        = render 'components/filter',
+          filter_service: filter_service,
+          url: products_path do
+          = render 'products/index/header/filter',
+            filter_service: filter_service
+
+      .col-3.d-flex.justify-content-end
+        = render 'review_imports/form'
+

@@ -1,0 +1,22 @@
+.card.h-100.d-flex.flex-column
+  = image_tag 'default_product_avatar.jpg',
+    class: 'card-img-top w-50 mx-auto d-block mt-3',
+    alt:   product.title
+
+  .card-body.d-flex.flex-column.flex-grow-1
+    %h5.card-title
+      = product.title
+    %p.card-text.text-muted
+      = product.description
+
+    .mt-auto
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          Price: #{number_to_currency(product.price)}
+        %li.list-group-item
+          Rating:
+          %span.text-warning ⭐
+          = product.average_rating.round(1)
+          %i.bi.bi-chat-left-text.ms-2
+          = "(#{product.feedbacks.count})"
+

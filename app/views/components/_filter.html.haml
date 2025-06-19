@@ -1,0 +1,33 @@
+.input-group{ data: { controller: 'filter' } }
+  = search_field_tag :term, filter_service.filter_params['term'],
+    class: 'form-control',                                      |
+    placeholder: 'Search..',                                    |
+    data: {                                                     |
+      'filter-target': :source,                                 |
+      action:          'keyup->filter#handleSearchField'        |
+    }                                                           |
+
+  %button.btn.btn-outline-secondary.btn-sm.rounded-end{
+    type: 'button',
+    aria: { expanded: 'false' },
+    data: {
+      bs_toggle: 'modal',
+      bs_target: '#filter_modal'
+    }
+  }
+    %i.bi.bi-filter
+
+  #filter_modal.modal.fade{role: :dialog, 'aria-hidden': :true, tabindex: '-1' }
+    .modal-dialog
+      .modal-content
+        .modal-body.text-start
+          = form_with url:, method: :get, data: { 'filter-target': :form } do |f|
+            = hidden_field_tag 'filters[term]', '', data: { 'filter-target': :target }
+
+            = yield
+
+            .row.mt-2
+              .col-12.d-flex.justify-content-end
+                = f.submit 'Filter', class: 'btn btn-primary'
+                = link_to 'Reset', url,
+                  class: 'btn btn-link'

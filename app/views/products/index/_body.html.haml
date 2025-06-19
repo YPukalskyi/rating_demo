@@ -1,0 +1,24 @@
+.row.row-cols-5.g-3
+  - @products.each do |product|
+    .col
+      .card.h-100.shadow-sm.rounded
+        = image_tag 'default_product_avatar.jpg',
+          class: 'card-img-top img-fluid',
+          style: 'max-height: 150px; object-fit: cover;',
+          alt: product.title
+
+        .card-body.d-flex.flex-column.p-3
+          %h5.card-title.mb-2
+            = link_to product.title.to_s[..60], product_path(product), class: 'link-secondary text-decoration-none'
+
+          %p.card-text.mt-auto.d-flex.align-items-center.gap-1
+            %span.text-warning ⭐
+            = product.avg_rating
+
+            %i.bi.bi-chat-left-text.ms-2
+            = "(#{product.feedbacks_count})"
+
+        .card-footer.bg-transparent
+          %p.card-text.mb-0
+            = number_to_currency(product.price)
+

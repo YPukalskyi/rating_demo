@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
+
+  private
+
+  # Simulates the current_user after authentication
+  def current_user
+    User.order("RANDOM()").first
+  end
 end

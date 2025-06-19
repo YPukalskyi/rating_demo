@@ -1,0 +1,10 @@
+.card.mt-2
+  .d-flex.flex-column.overflow-auto.p-3.rounded{ style: "height: 600px;" }
+    #feedback-list
+      - if feedbacks.any?
+        - feedbacks.order(created_at: :desc).each do |feedback|
+          = render 'feedbacks/feedback', feedback: feedback
+      - else
+        .d-flex.justify-content-center.align-items-center.flex-grow-1
+          %p.text-muted.mb-0.text-center
+            No feedback yet..

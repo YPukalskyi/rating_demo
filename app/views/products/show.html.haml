@@ -1,0 +1,10 @@
+.row.mt-4
+  .col-6
+    = render 'products/show/product',
+      product: @product
+  .col-6
+    = render 'feedbacks/form',
+      product: @product
+
+    = render 'products/show/feedbacks',
+      feedbacks: @product.feedbacks
