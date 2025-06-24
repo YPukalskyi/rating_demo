@@ -1,0 +1,24 @@
+%button.btn.btn-outline-secondary.rounded-end{
+  type: 'button',
+  aria: { expanded: 'false' },
+  data: {
+    bs_toggle: 'modal',
+    bs_target: '#import_modal'
+  }
+}
+  %i.bi.bi-filetype-csv
+
+#import_modal.modal.fade{ role: 'dialog', 'aria-hidden': 'true', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.modal-title
+          Import products feedbacks
+
+      .modal-body
+        = form_with url: review_imports_path, scope: :review_imports, method: :post do |f|
+          .mb-3
+            = f.label :file, 'Choose CSV file'
+            = f.file_field :file, accept: '.csv', class: 'form-control'
+          .d-flex.justify-content-end
+            = f.submit 'Import', class: 'btn btn-primary'

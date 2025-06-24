@@ -1,0 +1,19 @@
+.card
+  .card-body
+    = form_with(model: [product, product.feedbacks.build]) do |f|
+      .mb-3
+        = f.label :rating, "Rating", class: 'form-label fw-bold'
+        .btn-group.d-flex.flex-wrap{ role: "group", aria: { label: "Rating" } }
+          - (Feedback::MIN_RATING..Feedback::MAX_RATING).each do |rating|
+            = f.radio_button :rating, rating,
+              class: 'btn-check',
+              id:    "feedback_rating_#{rating}"
+
+            = f.label "rating_#{rating}", "⭐ #{rating}",
+              class: 'btn btn-outline-primary btn-sm'
+
+      .mb-3
+        = f.label :comment, "Comment", class: 'form-label fw-bold'
+        = f.text_area :comment, rows: 3, class: 'form-control'
+
+      = f.submit 'Send', class: 'btn btn-primary w-100'

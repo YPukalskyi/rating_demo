@@ -1,0 +1,14 @@
+.row.g-3
+  .col-12
+    %label.form-label.fw-bold
+      Rating
+    .btn-group.d-flex.flex-wrap{ role: "group" }
+      - (Feedback::MIN_RATING..Feedback::MAX_RATING).each do |rating|
+        = radio_button_tag 'filters[average_rating]', rating,
+          active_filter_average_rating?(filter_service, rating),
+          class: 'btn-check',
+          id:    "filter_average_rating_#{rating}",
+          autocomplete: "off"
+
+        = label_tag "filter_average_rating_#{rating}", "⭐ #{rating}",
+          class: 'btn btn-outline-primary'

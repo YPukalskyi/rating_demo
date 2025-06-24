@@ -1,0 +1,12 @@
+.card.mb-3
+  .card-body
+    .d-flex.justify-content-between
+      - feedback.rating.times do
+        ⭐
+      %small.text-muted
+        = feedback.created_at.to_date
+
+    %small.text-muted
+      User: #{feedback.user.email}
+    %p.align-text-bottom.mt-2
+      = feedback.comment
